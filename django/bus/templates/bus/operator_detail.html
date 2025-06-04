@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ operator.name }} - Pilihan Rute</title>
+    <link rel="stylesheet" href="{% static 'bus/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="main-title">Pilihan Rute {{ operator.name }}</h1>
+
+        {% if schedules %}
+            <div class="schedule-list">
+                {% for schedule in schedules %}
+                    <a href="{% url 'bus:ticket_detail' schedule_id=schedule.id %}" class="schedule-card-link">
+                        <div class="schedule-card">
+                            <h3>{{ schedule.origin }} - {{ schedule.destination }}</h3>
+                            <p><strong>Berangkat:</strong> {{ schedule.departure_time|date:"d M Y H:i" }}</p>
+                            <p><strong>Tiba:</strong> {{ schedule.arrival_time|date:"d M Y H:i" }}</p>
+                            <p><strong>Bus:</strong> {{ schedule.bus.bus_number }}</p>
+                            <p><strong>Harga:</strong> Rp {{ schedule.price|floatformat:0 }}</p>
+                            <p><strong>Kursi Tersedia:</strong> {{ schedule.available_seats }}</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="message">Tidak ada jadwal yang tersedia untuk {{ operator.name }} saat ini.</p>
+        {% endif %}
+        <div class="back-link">
+            <a href="{% url 'bus:home' %}" class="btn">Kembali ke Beranda</a>
+        </div>
+    </div>
+</body>
+</html>
