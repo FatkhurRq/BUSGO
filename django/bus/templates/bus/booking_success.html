@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemesanan Berhasil!</title>
+    <link rel="stylesheet" href="{% static 'bus/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="main-title success-title">Pemesanan Berhasil!</h1>
+        <div class="ticket-summary-card">
+            <p class="thank-you-message">Terima kasih, <strong>{{ booking.passenger_name }}</strong>!</p>
+            <p>Tiket Anda telah berhasil dipesan.</p>
+
+            <div class="ticket-details-section">
+                <h3>Detail Tiket Anda:</h3>
+                <ul>
+                    <li><strong>Nama:</strong> {{ booking.passenger_name }}</li>
+                    <li><strong>Jadwal:</strong> {{ booking.schedule.origin }} &rarr; {{ booking.schedule.destination }}</li>
+                    <li><strong>Waktu Berangkat:</strong> {{ booking.schedule.departure_time|date:"d M Y H:i" }}</li>
+                    <li><strong>Bus:</strong> {{ booking.schedule.bus.operator.name }} - {{ booking.schedule.bus.bus_number }}</li>
+                    <li><strong>Jumlah Tiket:</strong> {{ booking.number_of_tickets }}</li>
+                    <li><strong>Harga Total:</strong> Rp {{ booking.schedule.price|mul:booking.number_of_tickets|floatformat:0 }}</li>
+                    {# Anda bisa menambahkan kode booking di sini jika sudah ada #}
+                </ul>
+            </div>
+            <div class="action-buttons">
+                <a href="{% url 'bus:home' %}" class="btn">Pesan Tiket Lain</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
