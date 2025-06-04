@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmasi Pemesanan Tiket</title>
+    <link rel="stylesheet" href="{% static 'bus/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="main-title">Pemesanan Tiket</h1>
+
+        {% if error_message %}
+            <p class="message error-message">{{ error_message }}</p>
+            <div class="back-link">
+                <a href="{% url 'bus:ticket_detail' schedule.id %}" class="btn btn-secondary">Kembali</a>
+            </div>
+        {% elif form %}
+            <div class="booking-form-card">
+                <h3>Detail Jadwal</h3>
+                <p><strong>Bus:</strong> {{ schedule.bus.operator.name }} - {{ schedule.bus.bus_number }}</p>
+                <p><strong>Rute:</strong> {{ schedule.origin }} ke {{ schedule.destination }}</p>
+                <p><strong>Waktu Berangkat:</strong> {{ schedule.departure_time|date:"d M Y H:i" }}</p>
+                <p class="price-display"><strong>Harga Per Tiket:</strong> Rp {{ schedule.price|floatformat:0 }}</p>
+                <p><strong>Kursi Tersedia:</strong> {{ schedule.available_seats }}</p> {# Tampilkan kursi tersedia #}
+
+                <form method="post" class="booking-form">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {% if field.help_text %}
+                                <small class="form-help">{{ field.help_text }}</small>
+                            {% endif %}
+                            {# Loop untuk menampilkan error spesifik field #}
+                            {% for error in field.errors %}
+                                <p class="errorlist">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                    {# Untuk error non-field (misalnya dari clean() method di form) #}
+                    {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                            <p class="errorlist">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+
+                    <button type="submit">Konfirmasi & Bayar</button>
+                </form>
+            </div>
+            <div class="back-link">
+                <a href="{% url 'bus:ticket_detail' schedule.id %}" class="btn btn-secondary">Kembali</a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

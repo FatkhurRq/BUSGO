@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Tiket Bus</title>
+    <link rel="stylesheet" href="{% static 'bus/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="main-title">Tiket Bus</h1>
+        <div class="ticket-detail-card">
+            <p><strong>Berangkat dari:</strong> {{ schedule.origin }}</p>
+            <p><strong>Tujuan:</strong> {{ schedule.destination }}</p>
+            <p><strong>Jam:</strong> {{ schedule.departure_time|date:"H:i" }}</p>
+            <p><strong>Tanggal:</strong> {{ schedule.departure_time|date:"d M Y" }}</p>
+            <p><strong>Bus:</strong> {{ schedule.bus.operator.name }} - {{ schedule.bus.bus_number }}</p>
+            <p><strong>Ketersediaan tempat duduk:</strong> {{ schedule.available_seats }} kursi</p>
+            <p class="price-display"><strong>Harga:</strong> Rp {{ schedule.price|floatformat:0 }}</p>
+
+            {% if schedule.available_seats > 0 %}
+                <div class="action-buttons">
+                    <a href="{% url 'bus:book_ticket' schedule_id=schedule.id %}" class="btn">Pesan Tiket</a>
+                    <a href="{% url 'bus:operator_detail' operator_slug=schedule.bus.operator.slug %}" class="btn btn-secondary">Kembali ke Jadwal</a>
+                </div>
+            {% else %}
+                <p class="message error-message">Maaf, tiket untuk jadwal ini sudah habis.</p>
+                <div class="action-buttons">
+                    <a href="{% url 'bus:operator_detail' operator_slug=schedule.bus.operator.slug %}" class="btn btn-secondary">Kembali ke Jadwal</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

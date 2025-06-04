@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Pencarian Bus</title>
+    <link rel="stylesheet" href="{% static 'bus/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="main-title">Hasil Pencarian Jadwal Bus</h1>
+
+        <div class="search-form-section compact-form">
+            <h2>Cari Lagi</h2>
+            <form action="{% url 'bus:search_schedules' %}" method="GET" class="search-form">
+                <div class="form-group">
+                    <label for="id_origin_res">Dari:</label>
+                    <input type="text" id="id_origin_res" name="origin" placeholder="Kota Asal" value="{{ origin_query }}">
+                </div>
+                <div class="form-group">
+                    <label for="id_destination_res">Ke:</label>
+                    <input type="text" id="id_destination_res" name="destination" placeholder="Kota Tujuan" value="{{ destination_query }}">
+                </div>
+                <div class="form-group">
+                    <label for="id_date_res">Tanggal:</label>
+                    <input type="date" id="id_date_res" name="date" value="{{ date_query }}">
+                </div>
+                <button type="submit">Cari Bus</button>
+            </form>
+        </div>
+
+        {% if schedules %}
+            <div class="schedule-list">
+                {% for schedule in schedules %}
+                    <a href="{% url 'bus:ticket_detail' schedule_id=schedule.id %}" class="schedule-card-link">
+                        <div class="schedule-card">
+                            <h3>{{ schedule.origin }} - {{ schedule.destination }}</h3>
+                            <p><strong>Operator:</strong> {{ schedule.bus.operator.name }}</p>
+                            <p><strong>Bus:</strong> {{ schedule.bus.bus_number }}</p>
+                            <p><strong>Berangkat:</strong> {{ schedule.departure_time|date:"d M Y H:i" }}</p>
+                            <p><strong>Tiba:</strong> {{ schedule.arrival_time|date:"d M Y H:i" }}</p>
+                            <p><strong>Harga:</strong> Rp {{ schedule.price|floatformat:0 }}</p>
+                            <p><strong>Kursi Tersedia:</strong> {{ schedule.available_seats }}</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="message info-message">Tidak ditemukan jadwal bus yang sesuai dengan kriteria pencarian Anda.</p>
+        {% endif %}
+        <div class="back-link">
+            <a href="{% url 'bus:home' %}" class="btn btn-secondary">Kembali ke Beranda</a>
+        </div>
+    </div>
+</body>
+</html>

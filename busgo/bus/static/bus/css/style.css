@@ -1,0 +1,412 @@
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-title {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 50px;
+    font-size: 2.5em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+.operator-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+}
+
+.operator-card-link {
+    text-decoration: none; /* Remove underline from links */
+    color: inherit; /* Inherit text color */
+}
+
+.operator-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    height: 180px; /* Fixed height for consistency */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.operator-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    border-color: #007bff;
+}
+
+.operator-logo {
+    max-width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.operator-name {
+    color: #333;
+    font-size: 1.4em;
+    margin-bottom: 5px;
+}
+
+.operator-desc {
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* Form and Button styles (will be used later) */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="number"],
+.form-group input[type="datetime-local"],
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+button[type="submit"], .btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    text-decoration: none; /* For .btn acting as a link */
+    display: inline-block;
+    text-align: center;
+}
+
+button[type="submit"]:hover, .btn:hover {
+    background-color: #0056b3;
+}
+
+.message {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.errorlist {
+    color: red;
+    list-style-type: none;
+    padding: 0;
+    margin-top: 5px;
+}
+
+/* Schedule List */
+.schedule-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.schedule-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.schedule-card {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.schedule-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-color: #007bff;
+}
+
+.schedule-card h3 {
+    color: #007bff;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+
+.schedule-card p {
+    margin: 5px 0;
+    font-size: 0.95em;
+    color: #555;
+}
+
+.schedule-card strong {
+    color: #333;
+}
+
+.back-link {
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* Ticket Detail Card */
+.ticket-detail-card {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    max-width: 600px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.ticket-detail-card p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+.ticket-detail-card strong {
+    color: #007bff;
+}
+
+.price-display {
+    font-size: 1.5em;
+    color: #28a745; /* Green for price */
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.action-buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Spasi antar tombol */
+}
+
+.btn.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.error-message {
+    color: #dc3545; /* Red for error */
+    font-weight: bold;
+}
+
+/* Booking Form Card */
+.booking-form-card {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    max-width: 600px;
+    margin: 30px auto;
+}
+
+.booking-form-card h3 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+}
+
+.booking-form .form-group {
+    margin-bottom: 20px;
+}
+
+.booking-form .form-group label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.booking-form .form-group input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+}
+
+.booking-form button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+/* Booking Success Page */
+.success-title {
+    color: #28a745; /* Green for success */
+}
+
+.ticket-summary-card {
+    background-color: #e6ffe6; /* Light green background */
+    border: 1px solid #c3e6cb;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.thank-you-message {
+    font-size: 1.3em;
+    margin-bottom: 20px;
+    color: #155724;
+}
+
+.ticket-details-section {
+    background-color: #f0fff0;
+    border: 1px dashed #a0d6a0;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 25px;
+    text-align: left;
+}
+
+.ticket-details-section h3 {
+    color: #28a745;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.ticket-details-section ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ticket-details-section ul li {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.ticket-details-section ul li strong {
+    color: #333;
+    display: inline-block;
+    min-width: 120px; /* Align labels */
+}
+
+.errorlist {
+    color: red;
+    list-style-type: none;
+    padding: 0;
+    margin-top: 5px;
+    font-size: 0.9em;
+}
+.message.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Search Form Section */
+.search-form-section {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.search-form-section h2 {
+    color: #007bff;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+}
+
+.search-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    align-items: flex-end; 
+}
+
+.search-form .form-group {
+    margin-bottom: 0;
+    text-align: left;
+}
+
+.search-form button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1em;
+    margin-top: 10px;
+}
+
+
+.search-form-section.compact-form {
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.search-form-section.compact-form .search-form {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+}
+
+.message.info-message {
+    background-color: #e2f2ff;
+    color: #004085;
+    border-color: #b8daff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.section-title {
+    text-align: center;
+    color: #007bff;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-size: 2em;
+}

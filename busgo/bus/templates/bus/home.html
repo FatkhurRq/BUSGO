@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUSGO - Explore & Grab Your Ticket</title>
+    <link rel="stylesheet" href="{% static 'bus/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="main-title">Let's Get Explore And Grab Your Ticket</h1>
+
+        <div class="search-form-section">
+            <h2>Cari Tiket Bus Anda</h2>
+            <form action="{% url 'bus:search_schedules' %}" method="GET" class="search-form">
+                <div class="form-group">
+                    <label for="id_origin">Dari:</label>
+                    <input type="text" id="id_origin" name="origin" placeholder="Kota Asal" value="{{ origin_query }}">
+                </div>
+                <div class="form-group">
+                    <label for="id_destination">Ke:</label>
+                    <input type="text" id="id_destination" name="destination" placeholder="Kota Tujuan" value="{{ destination_query }}">
+                </div>
+                <div class="form-group">
+                    <label for="id_date">Tanggal:</label>
+                    <input type="date" id="id_date" name="date" value="{{ date_query }}">
+                </div>
+                <button type="submit">Cari Bus</button>
+            </form>
+        </div>
+
+        <h2 class="section-title">Atau Pilih Operator:</h2>
+        <div class="operator-grid">
+            {% for operator in operators %}
+                <a href="{% url 'bus:operator_detail' operator_slug=operator.slug %}" class="operator-card-link">
+                    <div class="operator-card">
+                        {# Anda bisa menambahkan gambar logo operator di sini jika ada #}
+                        <img src="{% static 'bus/images/'|add:operator.slug|add:'.png' %}" alt="{{ operator.name }} Logo" class="operator-logo" onerror="this.style.display='none'">
+                        <h3 class="operator-name">{{ operator.name }}</h3>
+                        <p class="operator-desc">{{ operator.description|truncatechars:50 }}</p>
+                    </div>
+                </a>
+            {% empty %}
+                <p>Belum ada operator bus yang tersedia.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
